@@ -32,11 +32,33 @@ int instr_trans(char *op, char *args, char* mcode)
 		strcpy(mcode,"a3");
 
 	else if(source[0]=='$'&&destination[0]=='%'){// immediate to reg
-		if(destination[2]=='c')
+		if(destination[1]=='e'&&destination[2]=='c') //ec~
 			strcpy(mcode,"b9");
-		else if(destination[2]=='d')
-			strcpy(mcode,"ba");
-		else
+		else if(destination[2]=='d'){
+			if(destination[3]=='i') //edi
+				strcpy(mcode,"bf");
+			else if(destination[3]=='x') //edx
+				strcpy(mcode,"ba");
+			else
+				strcpy(mcode,"error");
+			}
+		else if(destination[2]=='b'){ 
+			if(destination[3]=='p') //ebp
+				strcpy(mcode,"bd");
+			else if(destination[3]=='x') //ebx
+				strcpy(mcode,"bb");
+			else
+				strcpy(mcode,"error");
+			}
+		else if(destination[2]=='s'){ 
+			if(destination[3]=='p')  //esp
+				strcpy(mcode,"bc");
+			else if(destination[3]=='i')  //eip
+				strcpy(mcode,"be");
+			else
+				strcpy(mcode,"error");
+			}
+		else if(destination[2]=='a'&&destination[3]=='x')
 			strcpy(mcode,"b8");
 	}
 	else
