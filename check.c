@@ -3,11 +3,12 @@
 int is_valid(char *op, char *args)
 {
 	char *source,*destination;
-
+	char tmp[256];
 	if(strcmp(op,"mov")!=0)  //if instruction is not move
 		return 0;
-	
-	source = strtok(args,","); //divide with ',' 
+
+	strcpy(tmp,args);
+	source = strtok(tmp,","); //divide with ',' 
 	destination = strtok(NULL, "\n");
 
 	if(source[0]=='('&&destination[0]=='(') //if source, destination is memory
