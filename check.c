@@ -8,14 +8,14 @@ int is_valid(char *op, char *args)
 		return 0;
 
 	strcpy(tmp,args);
-	source = strtok(tmp,","); //divide with ',' 
+	source = strtok(tmp,","); //divide with ','symbol
 	destination = strtok(NULL, "\n");
-
-	if(source[0]=='('&&destination[0]=='(') //if source, destination is memory
+	//invalid pattern
+	if(source[0]=='('&&destination[0]=='(') //mem to mem
 		return 0;
-	else if(source[0]=='$'&&destination[0]=='$') //if source, destination is immediate
+	else if(source[0]=='$'&&destination[0]=='$') //immediate to immediate
 		return 0;
-	else if(destination[0]=='$') // if destination is immediate
+	else if(destination[0]=='$') // destination has immediate value
 		return 0;
 	else
 		return 1;
